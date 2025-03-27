@@ -1,27 +1,37 @@
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+
   backend "local" {
-    path = "cpg-qe/mock-aws-account-2/blob/main/mock_state.tfstate/mock_state.tfstate"
+    path = "./terraform.tfstate"
   }
 }
 
-
 provider "aws" {
   region = "us-east-1"
+  # Uncomment and configure if using actual AWS credentials
+  # access_key = "your-access-key"
+  # secret_key = "your-secret-key"
 }
 
-resource "aws_organizations_account" "account" {
-  name              = "camsareq0000006-sales-finance-camapp"
-  email             = "itom-aws-cafa+CAMSAREQ0000006-CH0mRyuL@servicenow.com"
-  parent_id         = "ou-k7qu-rvmu2ynq"
-  close_on_deletion = true
-  create_govcloud   = false
+# Mock AWS Account Data
+resource "null_resource" "mock_aws_account" {
+  triggers = {
+    id = "123456789012"
+    account_name = "mock-account"
+    organization_id = "o-abcdefghij"
+  }
+}
 
-  tags = {
-    business_application      = "CAM APP"
-    business_unit             = "Finance"
-    cost_center               = "Sales"
-    cost_center_account_number = "ACN00007"
-    department                = "Customer Support"
-    environment               = "Development"
+# Output Mock AWS Account Data
+output "aws_account_details" {
+  value = {
+    account_id      = null_resource.mock_aws_account.triggers["id"]
+    account_name    = null_resource.mock_aws_account.triggers["account_name"]
+    organization_id = null_resource.mock_aws_account.triggers["organization_id"]
   }
 }
