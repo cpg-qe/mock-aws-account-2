@@ -1,3 +1,13 @@
+terraform {
+  backend "remote" {
+    organization = "camautoorg"
+
+    workspaces {
+      name = "camsareq0000006-camsaexe0000007-sales-finance"
+    }
+  }
+}
+
 provider "aws" {
   region = "us-east-1"
 }
