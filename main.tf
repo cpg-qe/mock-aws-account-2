@@ -30,7 +30,7 @@ resource "null_resource" "mock_aws_account" {
 # Output Mock AWS Account Data
 output "aws_account_details" {
   value = {
-    account_id      = null_resource.mock_aws_account.triggers["id"]
+    id      = null_resource.mock_aws_account.triggers["id"]
     account_name    = null_resource.mock_aws_account.triggers["account_name"]
     organization_id = null_resource.mock_aws_account.triggers["organization_id"]
   }
