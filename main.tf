@@ -1,13 +1,9 @@
 terraform {
-  backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "camautoorg"
-
-    workspaces {
-      name = "camsareq0000006-camsaexe0000007-sales-finance"
-    }
+  backend "local" {
+    path = "./mock_state.tfstate"
   }
 }
+
 
 provider "aws" {
   region = "us-east-1"
