@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "./mock_state.tfstate"
+    path = "cpg-qe/mock-aws-account-2/blob/main/mock_state.tfstate/mock_state.tfstate"
   }
 }
 
